@@ -25,6 +25,9 @@ sn: Zan
 uid: davis
 userPassword: davis
 
+
+
+
 dn: dc=springframework,dc=org
 objectclass: top
 objectclass: domain
@@ -54,7 +57,7 @@ objectclass: inetOrgPerson
 cn: Ben Alex
 sn: Alex
 uid: ben
-userPassword: $2a$10$c6bSeWPhg06xB1lvmaWNNe4NROmZiSpYhlocU/98HNr2MhIOiSt36
+userPassword: {bcrypt}$2a$10$z0MY2MkDhhOs.a4hPOsTq.9zFbsqHXbkEqpHhtfMz9TvDM0IEYNx2
 
 dn: uid=bob,ou=people,dc=springframework,dc=org
 objectclass: top
@@ -64,10 +67,9 @@ objectclass: inetOrgPerson
 cn: Bob Hamilton
 sn: Hamilton
 uid: bob
-userPassword: bob
+userPassword: {noop}bob
 
-
-dn: cn=mouse,ou=people,dc=springframework,dc=org
+dn: cn=mouse\, jerry,ou=people,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
@@ -75,7 +77,7 @@ objectclass: inetOrgPerson
 cn: Mouse, Jerry
 sn: Mouse
 uid: jerry
-userPassword: jerry
+userPassword: {noop}jerry
 
 dn: cn=slash/guy,ou=people,dc=springframework,dc=org
 objectclass: top
@@ -85,7 +87,7 @@ objectclass: inetOrgPerson
 cn: slash/guy
 sn: Slash
 uid: slashguy
-userPassword: slashguy
+userPassword: {noop}slashguy
 
 dn: cn=developers,ou=groups,dc=springframework,dc=org
 objectclass: top

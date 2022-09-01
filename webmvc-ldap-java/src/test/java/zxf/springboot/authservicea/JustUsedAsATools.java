@@ -10,6 +10,6 @@ public class JustUsedAsATools {
     @Test
     public void generateBCryptPassword() throws Exception {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        System.out.println(passwordEncoder.encode("davis"));
+        System.out.println(passwordEncoder.encode("ben"));
     }
 }
