@@ -37,9 +37,25 @@
 - 在ＬＤＡＰ中识别一个条目，我们使用ＤＮ，ＤＮ在一个目录中是全局唯一的，它的值是表示该条目在目录树中的位置，可以被“连接”为当前条目的名字和它的父节点一直到顶层根节点的条目“相加”
 
 ## 层级结构
+### DNS-based LDAP tree
 - DC* (Root/Middle)
 - OU* (Middle)
 - CN or UID(Leaf)
+### Other
+- O*
+- CN
+
+## Ldap Url
+- ```ldap[s]://<hostname>:<port>/<base_dn>?<attributes>?<scope>?<filter>```
+
+|  Component  | Description |
+|-------------|-------------|
+|`<hostname>`|Name (or IP address in dotted format) of the LDAP server (for example, ldap.netscape.com or 192.202.185.90). |
+|`<port>`|Port number of the LDAP server (for example, 696).<br>If no port is specified, the standard LDAP port (389) is used. |
+|`<base_dn>`|Distinguished name (DN) of an entry in the directory. This DN identifies the entry that is starting point of the search.<br>If this component is empty, the search starts at the root DN. |
+|`<attributes>`|The attributes to be returned. To specify more than one attribute, use commas to delimit the attributes (for example, "cn,mail,telephoneNumber").<br>If no attributes are specified in the URL, all attributes are returned. |
+|`<scope>`|The scope of the search, which can be one of these values:<br> - base retrieves information only about the distinguished name (<base_dn>) specified in the URL.<br> - one retrieves information about entries one level below the distinguished name (<base_dn>) specified in the URL. The base entry is not included in this scope.<br> - sub retrieves information about entries at all levels below the distinguished name (<base_dn>) specified in the URL. The base entry is included in this scope.<br>If no scope is specified, the server performs a base search. |
+|`<filter>`|Search filter to apply to entries within the specified scope of the search.<br>If no filter is specified, the server uses the filter (objectClass=*).|
 
 ## LDIF
 - 要Escape “,” 请使用\,
