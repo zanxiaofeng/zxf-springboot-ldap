@@ -19,6 +19,7 @@
     <modules>
         <module>webmvc-ldap-xml</module>
         <module>webmvc-ldap-java</module>
+        <module>spring-ldap-java</module>
     </modules>
 
     <properties>
