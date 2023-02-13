@@ -1,5 +1,7 @@
 package zxf.ldap.service;
 
+import com.sun.jndi.ldap.LdapCtx;
+import com.sun.jndi.ldap.LdapCtxFactory;
 import zxf.ldap.bean.LdapGroup;
 import zxf.ldap.bean.LdapUser;
 import zxf.ldap.mapper.LdapGroupAttributeMapper;
@@ -11,13 +13,14 @@ import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
 import javax.naming.directory.SearchResult;
 import javax.naming.ldap.InitialLdapContext;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class LdapServiceByJavaX extends LdapServiceBase {
+public class LdapServiceBySun extends LdapServiceBase {
     public List<LdapGroup> listGroups() throws NamingException {
-        DirContext dirContext = createContext();
+        LdapCtx ldapCtx = createContext();
         //Do not include BASE-DC
-        NamingEnumeration<SearchResult> results = dirContext.search("OU=HK,OU=Groups", "(objectClass=group)", getDefaultSearchControls());
+        NamingEnumeration<SearchResult> results = ldapCtx.search("OU=HK,OU=Groups", "(objectClass=group)", getDefaultSearchControls());
 
         List<LdapGroup> groups = new ArrayList<>();
         while (results.hasMore()) {
@@ -27,25 +30,25 @@ public class LdapServiceByJavaX extends LdapServiceBase {
     }
 
     public LdapGroup findGroup() throws NamingException {
-        DirContext dirContext = createContext();
+        LdapCtx ldapCtx = createContext();
         //Do not include BASE-DC
-        Attributes attributes = dirContext.getAttributes("CN=HR,OU=HK,OU=Groups");
+        Attributes attributes = ldapCtx.getAttributes("CN=HR,OU=HK,OU=Groups");
         return new LdapGroupAttributeMapper().mapFromAttributes(attributes);
     }
 
     public LdapUser authenticate() throws NamingException {
-        DirContext dirContext = createContext("CN=Davis,OU=People,DC=zxf,DC=com", "*****");
+        LdapCtx ldapCtx = createContext("CN=Davis,OU=People,DC=zxf,DC=com", "*****");
         //Do not include BASE-DC
-        Attributes attributes = dirContext.getAttributes("CN=Davis,OU=People");
+        Attributes attributes = ldapCtx.getAttributes("CN=Davis,OU=People");
         return new LdapUserAttributeMapper().mapFromAttributes(attributes);
     }
 
 
-    private DirContext createContext() throws NamingException {
+    private LdapCtx createContext() throws NamingException {
         return createContext("CN=DEV,OU=Service,DC=zxf,DC=com", "*****");
     }
 
-    private DirContext createContext(String principal, String credentials) throws NamingException {
-        return new InitialLdapContext(getAuthenticatedEnv(principal, credentials), null);
+    private LdapCtx createContext(String principal, String credentials) throws NamingException {
+        return (LdapCtx) new LdapCtxFactory().getInitialContext(getAuthenticatedEnv(principal, credentials));
     }
 }
