@@ -29,18 +29,5 @@ public class TestSpring {
 
         System.out.println("findUser:");
         System.out.println(ldapService.findUser());
-
-        org.springframework.ldap.core.NameAwareAttributes;
-        javax.naming.directory.Attribute;
-        javax.naming.directory.Attributes;
-        javax.naming.directory.DirContext;
-        javax.naming.ldap.InitialLdapContext;
-        javax.naming.spi.NamingManager;
-        javax.naming.spi.InitialContextFactory;
-
-        com.sun.jndi.ldap.LdapCtx;
-        com.sun.jndi.ldap.LdapCtxFactory
-
-
     }
 }
