@@ -9,6 +9,8 @@ import javax.naming.directory.Attributes;
 public class LdapGroupAttributeMapper implements AttributesMapper<LdapGroup> {
     @Override
     public LdapGroup mapFromAttributes(Attributes attributes) throws NamingException {
+        System.out.println("Attributes of Group: " + attributes);
+
         LdapGroup ldapGroup = new LdapGroup();
         ldapGroup.setName(attributes.get("name").get().toString());
         return ldapGroup;
