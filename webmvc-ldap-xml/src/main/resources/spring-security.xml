@@ -21,18 +21,18 @@
     </http>
 
     <authentication-manager>
-        <ldap-authentication-provider user-dn-pattern="uid={0},ou=people"
-                                      group-search-base="ou=groups">
+        <ldap-authentication-provider user-search-filter="(uid={0})" user-search-base="ou=people,dc=springframework,dc=org"
+                                      group-search-filter="(uniqueMember={0})" group-search-base="ou=groups,dc=springframework,dc=org"
+                                      role-prefix="role_"  >
             <password-compare>
                 <password-encoder ref="delegatingPasswordEncoder"/>
             </password-compare>
         </ldap-authentication-provider>
     </authentication-manager>
 
-    <ldap-server url="ldap://localhost:8389/dc=springframework,dc=org"/>
+    <ldap-server url="ldap://localhost:8389" manager-dn="" manager-password=""/>
 
-    <beans:bean id="simpleUrlAuthenticationSuccessHandler"
-                class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
+    <beans:bean id="simpleUrlAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">
         <beans:constructor-arg value="/home"/>
     </beans:bean>
 </beans:beans>

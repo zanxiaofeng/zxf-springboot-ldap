@@ -14,6 +14,7 @@ public class HomeController {
     public ModelAndView home(Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("principal", (LdapUserDetails) authentication.getPrincipal());
+        modelAndView.addObject("authorities", authentication.getAuthorities());
         return modelAndView;
     }
 }

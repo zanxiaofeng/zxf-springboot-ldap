@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -16,16 +17,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .anyRequest().fullyAuthenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                .successHandler(new SimpleUrlAuthenticationSuccessHandler("/home"));
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.ldapAuthentication()
-                .userDnPatterns("uid={0},ou=people")
+                .userSearchBase("ou=people")
+                .userSearchFilter("(uid={0})")
                 .groupSearchBase("ou=groups")
+                .groupSearchFilter("(uniqueMember={0})")
+                .groupSearchSubtree(true)
+                .rolePrefix("Role_")
                 .contextSource()
                 .url("ldap://localhost:9389/dc=springframework,dc=org")
+                .managerDn("")
+                .managerPassword("")
                 .and()
                 .passwordEncoder(delegatingPasswordEncoder());
     }

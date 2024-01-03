@@ -61,4 +61,21 @@
 - 要Escape “,” 请使用\,
 
 ## Key Classes
+- org.springframework.security.config.annotation.authentication.configurers.ldap.LdapAuthenticationProviderConfigurer
 - org.springframework.security.ldap.authentication.LdapAuthenticationProvider
+- org.springframework.ldap.core.support.BaseLdapPathContextSource[interface]
+- org.springframework.ldap.core.support.DirContextSource
+- org.springframework.ldap.core.support.LdapContextSource
+- org.springframework.security.ldap.DefaultSpringSecurityContextSource
+- org.springframework.security.ldap.ppolicy.PasswordPolicyAwareContextSource
+- org.springframework.security.ldap.authentication.LdapAuthenticator[interface]
+- org.springframework.security.ldap.authentication.BindAuthenticator
+- org.springframework.security.ldap.authentication.PasswordComparisonAuthenticator
+- org.springframework.security.ldap.userdetails.LdapAuthoritiesPopulator[interface]
+- org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator
+- org.springframework.security.ldap.authentication.UserDetailsServiceLdapAuthoritiesPopulator
+- org.springframework.security.ldap.userdetails.UserDetailsContextMapper[interface]
+- org.springframework.security.ldap.userdetails.LdapUserDetailsMapper
+- org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper[interface]
+- org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
+- ~/.m2/repository/org/springframework/security/spring-security-config/5.6.5/spring-security-config-5.6.5.jar!/org/springframework/security/config/spring-security-2.0.xsd
